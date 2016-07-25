@@ -24,12 +24,12 @@ export default class App extends Component {
     guri.on('logout', () => this.setState({ user: null }));
   }
 
-  render(props, { user }) {
+  render({ url }, { user }) {
     return (
       <Layout fixed-header>
         <Header user={user} />
         <Layout.Content style={styles.mainContainer}>
-          <Router>
+          <Router url={url}>
             <Home path='/' />
             <Guide path='/guide' />
             <Login path='/login' />

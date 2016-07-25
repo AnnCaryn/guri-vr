@@ -1,5 +1,6 @@
 
 const express = require('express');
+const render = require('preact-render-to-string');
 const config = require('./config.json');
 const api = require('./api');
 const auth = require('./auth');
@@ -7,6 +8,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const bodyParser = require('body-parser');
 const db = require('./db');
+//const Root = require('./client/src/components/App');
 
 const app = express();
 
@@ -40,6 +42,6 @@ app.use(function(req, res, next) {
     next();
   }
 });
-app.get('*', (req, res) => res.render('index', { user: req.userData, analyticsId: config.analyticsId}));
+app.get('*', (req, res) => res.render('index', { user: req.userData, analyticsId: config.analyticsId, content: ''/*render(<Root url={req.path} />)*/}));
 
 app.listen(config.server.port);
